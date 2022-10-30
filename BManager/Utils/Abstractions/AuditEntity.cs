@@ -1,14 +1,14 @@
-﻿namespace BManager.Utils
+﻿namespace BManager.Utils.Abstractions
 {
     public class AuditEntity : Entity
     {
         public DateTimeOffset CreatedOn
         {
-            get;set;
+            get; set;
         }
         public DateTimeOffset UpdatedOn
         {
-            get;set;
+            get; set;
         }
         public int CreatedBy
         {
@@ -16,7 +16,7 @@
         }
         public int UpdatedBy
         {
-            get;set;
+            get; set;
         }
         public DateTimeOffset DeletedOn
         {
@@ -24,7 +24,7 @@
         }
         public int DeletedBy
         {
-            get;set;
+            get; set;
         }
     }
 }

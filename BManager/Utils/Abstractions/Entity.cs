@@ -1,4 +1,4 @@
-﻿namespace BManager.Utils
+﻿namespace BManager.Utils.Abstractions
 {
     public class Entity
     {
