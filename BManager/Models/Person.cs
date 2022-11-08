@@ -10,6 +10,5 @@ namespace BManager.Models
         public Gender Gender { get; set; }
         public List<Telephone> Telephones { get; set; } = new List<Telephone>();
         public List<Speciality> Specialities { get; set; } = new List<Speciality>();
-
     }
 }

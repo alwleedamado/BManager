@@ -1,5 +1,5 @@
 ﻿using BManager.Dtos.Person;
-using BManager.Migrations;
+using BManager.Models;
 
 namespace BManager.Mappings
 {

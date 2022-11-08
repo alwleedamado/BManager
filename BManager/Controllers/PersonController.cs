@@ -2,6 +2,7 @@
 using BManager.Data.IRepositories;
 using BManager.Data.Repositories;
 using BManager.Dtos.Person;
+using BManager.Models;
 using BManager.Utils;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,12 +12,10 @@ namespace BManager.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonController : TypedController<Person, PersonForCreationDto, PersonGetDto, PersonUpdateDto, PersonRepository>
+    public class PersonController : TypedController<Person, PersonForCreationDto, PersonGetDto, PersonUpdateDto>
     {
-        public PersonController(IPersonRepository personRepository, IMapper mapper)
+        public PersonController(IPersonRepository personRepository, IMapper mapper) : base(personRepository, mapper)
         {
-            _repository = personRepository;
-            _mapper = mapper;
         }
 
         // GET: api/<ValuesController>

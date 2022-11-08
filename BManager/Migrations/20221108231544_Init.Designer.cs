@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BManager.Migrations
 {
     [DbContext(typeof(BManagerDbContext))]
-    [Migration("20221031185638_Person")]
-    partial class Person
+    [Migration("20221108231544_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -64,6 +64,48 @@ namespace BManager.Migrations
                     b.ToTable("Persons");
                 });
 
+            modelBuilder.Entity("BManager.Models.Speciality", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("CreatedOn")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("DeletedOn")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PersonId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("UpdatedOn")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
+
+                    b.ToTable("Speciality");
+                });
+
             modelBuilder.Entity("BManager.Models.Telephone", b =>
                 {
                     b.Property<int>("Id")
@@ -87,8 +129,9 @@ namespace BManager.Migrations
                     b.Property<int>("PersonId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PhoneType")
-                        .HasColumnType("int");
+                    b.Property<string>("PhoneType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TelephoneNumber")
                         .HasColumnType("nvarchar(max)");
@@ -106,6 +149,13 @@ namespace BManager.Migrations
                     b.ToTable("Telephone");
                 });
 
+            modelBuilder.Entity("BManager.Models.Speciality", b =>
+                {
+                    b.HasOne("BManager.Models.Person", null)
+                        .WithMany("Specialities")
+                        .HasForeignKey("PersonId");
+                });
+
             modelBuilder.Entity("BManager.Models.Telephone", b =>
                 {
                     b.HasOne("BManager.Models.Person", null)
@@ -117,6 +167,8 @@ namespace BManager.Migrations
 
             modelBuilder.Entity("BManager.Models.Person", b =>
                 {
+                    b.Navigation("Specialities");
+
                     b.Navigation("Telephones");
                 });
 #pragma warning restore 612, 618

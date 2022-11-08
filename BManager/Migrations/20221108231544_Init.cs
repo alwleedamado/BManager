@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BManager.Migrations
 {
-    public partial class Person : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,6 +31,32 @@ namespace BManager.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Speciality",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PersonId = table.Column<int>(type: "int", nullable: true),
+                    CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    UpdatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: false),
+                    DeletedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    DeletedBy = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Speciality", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Speciality_Persons_PersonId",
+                        column: x => x.PersonId,
+                        principalTable: "Persons",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Telephone",
                 columns: table => new
                 {
@@ -38,7 +64,7 @@ namespace BManager.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TelephoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PersonId = table.Column<int>(type: "int", nullable: false),
-                    PhoneType = table.Column<int>(type: "int", nullable: false),
+                    PhoneType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     UpdatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
@@ -58,6 +84,11 @@ namespace BManager.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Speciality_PersonId",
+                table: "Speciality",
+                column: "PersonId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Telephone_PersonId",
                 table: "Telephone",
                 column: "PersonId");
@@ -65,6 +96,9 @@ namespace BManager.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Speciality");
+
             migrationBuilder.DropTable(
                 name: "Telephone");
 

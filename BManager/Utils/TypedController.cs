@@ -1,21 +1,21 @@
 ﻿using AutoMapper;
 using BManager.Dtos.Person;
 using BManager.Utils.Abstractions;
+using Devart.Common;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BManager.Utils
 {
-    public abstract class TypedController<TEntity, TCreateDto, TViewDto, TUpdateDto, TRepository>
+    public abstract class TypedController<TEntity, TCreateDto, TViewDto, TUpdateDto>
         : ControllerBase
         where TEntity: AuditEntity
         where TCreateDto : class
         where TUpdateDto : class
-        where TRepository : IRepository<TEntity>
     {
         protected readonly IRepository<TEntity> _repository;
         protected IMapper _mapper;
 
-        public TypedController(TRepository repository, IMapper mapper)
+        public TypedController(IRepository<TEntity> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -35,7 +35,7 @@ namespace BManager.Utils
 
         // POST api/<ValuesController>
         [HttpPost]
-        public async void Post([FromBody] TCreateDto dto)
+        public async Task<IActionResult> Post([FromBody] TCreateDto dto)
         {
             if (!ModelState.IsValid)
             {
