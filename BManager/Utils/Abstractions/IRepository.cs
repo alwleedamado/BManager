@@ -6,7 +6,7 @@
         Task AddAllAsync(IEnumerable<T> entities);
         Task<T> GetAsync(int id);
         Task<T> GetNoTracking(int id);
-        Task<IEnumerable<T>> GetAllAsync();
+        Task<IEnumerable<T>> GetAllAsync(QueryParams query);
         Task<IEnumerable<T>> GetByIds(IEnumerable<int> ids);
         Task UpdateAsync(T entity);
         Task UpdateRange(IEnumerable<T> entities);

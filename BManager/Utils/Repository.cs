@@ -32,9 +32,14 @@ namespace BManager.Utils
             await Task.CompletedTask;
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IEnumerable<T>> GetAllAsync(QueryParams query)
         {
-            return await _context.Set<T>().ToListAsync().ConfigureAwait(false);
+            return await _context.Set<T>()
+                .AsNoTracking()
+              .OrderByDescending(x => x.Id)
+              .Skip((query.PageCount - 1) * query.PageSize)
+              .Take(query.PageSize)
+              .ToListAsync().ConfigureAwait(false);
         }
 
         public async Task<T> GetAsync(int id)
@@ -85,7 +90,7 @@ namespace BManager.Utils
 
         public async Task UpdateRange(IEnumerable<T> entities)
         {
-            foreach(var entity in entities)
+            foreach (var entity in entities)
             {
                 entity.UpdatedOn = DateTime.Now;
                 _context.Update(entity);
