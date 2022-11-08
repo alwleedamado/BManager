@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FKZ5HaZHw6aIpqQG+UaQ86slXT7lFaEMGzc+ZwZ3H9a/lzGjek341m/xttJbuigx3NMO0ee2YmwbN5jluwiCbw==",
+  "dgSpecHash": "65/QiIgE7iOP7IBxmuzHLpo8UBU+lNYtIh+rr/fyBLUQJaz8rEha9nnvarZ4bBN2t16KbZkz/i9+tV17d4Vstw==",
   "success": true,
-  "projectFilePath": "C:\\playground\\dotnet\\BManager\\BManager\\BManager.csproj",
+  "projectFilePath": "C:\\playground\\FreeLanceManagement\\BManager\\BManager\\BManager.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PC\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\automapper.collection\\9.0.0\\automapper.collection.9.0.0.nupkg.sha512",
