@@ -11,5 +11,14 @@ namespace BManager.Data.Repositories
         {
 
         }
+
+        public override async Task<IEnumerable<Person>> GetAllAsync(QueryParams query)
+        {
+            return await _context
+                .Persons.AsNoTracking()
+                .Include(p => p.Telephones)
+                .ToListAsync()
+                .ConfigureAwait(false);
+        }
     }
 }
