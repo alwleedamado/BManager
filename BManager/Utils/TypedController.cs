@@ -21,16 +21,18 @@ namespace BManager.Utils
             _mapper = mapper;
         }
         [HttpGet]
-        public async Task<IActionResult> Get(QueryParams? query)
+        public async Task<IActionResult> Get([FromQuery]QueryParams? query)
         {
-            return Ok(await _repository.GetAllAsync(query));
+            var entities = await _repository.GetAllAsync(query);
+            return Ok(_mapper.Map<TViewDto[]>(entities));
         }
 
         // GET api/<ValuesController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult> Get(int id)
         {
-            return Ok(await _repository.GetAsync(id));
+            var entity = await _repository.GetAsync(id);
+            return Ok(_mapper.Map<TViewDto>(entity));
         }
 
         // POST api/<ValuesController>

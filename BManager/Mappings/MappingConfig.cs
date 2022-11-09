@@ -9,6 +9,7 @@ namespace BManager.Mappings
         {
             CreateMap<PersonForCreationDto, Person>();
             CreateMap<Person, PersonGetDto>();
+            CreateMap<PersonUpdateDto, Person>();
         }
     }
 }

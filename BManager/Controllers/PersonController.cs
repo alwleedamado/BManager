@@ -19,6 +19,7 @@ namespace BManager.Controllers
         }
 
         // GET: api/<ValuesController>
+        
       
     }
 }
