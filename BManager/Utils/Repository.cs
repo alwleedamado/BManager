@@ -6,7 +6,7 @@ namespace BManager.Utils
 {
     public abstract class Repository<T> : IRepository<T> where T : AuditEntity
     {
-        private readonly BManagerDbContext _context;
+        protected readonly BManagerDbContext _context;
         public Repository(BManagerDbContext context)
         {
             _context = context;
@@ -14,11 +14,14 @@ namespace BManager.Utils
 
         public virtual async Task AddAllAsync(IEnumerable<T> entities)
         {
+            foreach (var entity in entities)
+                entity.CreatedOn = DateTime.Now;
             await _context.Set<T>().AddRangeAsync(entities).ConfigureAwait(false);
         }
 
         public virtual async Task AddAsync(T entity)
         {
+            entity.CreatedOn = DateTime.Now;
             await _context.Set<T>().AddAsync(entity).ConfigureAwait(false);
         }
 
