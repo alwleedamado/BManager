@@ -34,11 +34,13 @@ namespace BManager.Utils
 
         public async Task<IEnumerable<T>> GetAllAsync(QueryParams query)
         {
+            var pageCount = query.PageCount != 0 ? query.PageCount : 1;
+            var pageSize = query.PageSize != 0 ? query.PageSize : 10;
             return await _context.Set<T>()
                 .AsNoTracking()
               .OrderByDescending(x => x.Id)
-              .Skip((query.PageCount - 1) * query.PageSize)
-              .Take(query.PageSize)
+              .Skip((pageCount - 1) * query.PageSize)
+              .Take(pageSize)
               .ToListAsync().ConfigureAwait(false);
         }
 
