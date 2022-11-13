@@ -5,17 +5,8 @@ namespace BManager.Models
 {
     public class Telephone : AuditEntity
     {
-        public string TelephoneNumber
-        {
-            get; set;
-        }
-        public int PersonId
-        {
-            get; set;
-        }
-        public PhoneType PhoneType
-        {
-            get; set;
-        }
+        public string TelephoneNumber { get; set; }
+        public int PersonId { get; set; }
+        public PhoneType PhoneType { get; set; }
     }
 }
