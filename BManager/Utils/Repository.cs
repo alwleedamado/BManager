@@ -4,75 +4,90 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BManager.Utils
 {
-    public abstract class Repository<T> : IRepository<T> where T : AuditEntity
+    public abstract class Repository<TType, TFilterType> : IRepository<TType, TFilterType> where TType : AuditEntity
+        where TFilterType : class
     {
         protected readonly BManagerDbContext _context;
         public Repository(BManagerDbContext context)
         {
             _context = context;
         }
-
-        public virtual async Task AddAllAsync(IEnumerable<T> entities)
+        protected virtual IQueryable<TType> Query => _context.Set<TType>().Where(x => x.DeletedOn == null).AsQueryable<TType>();
+        public virtual async Task AddAllAsync(IEnumerable<TType> entities)
         {
             foreach (var entity in entities)
                 entity.CreatedOn = DateTime.Now;
-            await _context.Set<T>().AddRangeAsync(entities).ConfigureAwait(false);
+            await _context.Set<TType>().AddRangeAsync(entities).ConfigureAwait(false);
         }
 
-        public virtual async Task AddAsync(T entity)
+        public abstract IQueryable<TType> Filter(IQueryable<TType> query, TFilterType filter);
+
+        public virtual async Task AddAsync(TType entity)
         {
             entity.CreatedOn = DateTime.Now;
-            await _context.Set<T>().AddAsync(entity).ConfigureAwait(false);
+            await _context.Set<TType>().AddAsync(entity).ConfigureAwait(false);
         }
 
         public virtual async Task<int> CountAsync()
         {
-            return await _context.Set<T>().CountAsync().ConfigureAwait(false);
+            return await _context.Set<TType>().CountAsync().ConfigureAwait(false);
         }
-        public virtual async Task Delete(T entity)
+        public virtual async Task Delete(TType entity)
         {
-            _context.Set<T>().Remove(entity);
+            _context.Set<TType>().Remove(entity);
             await Task.CompletedTask;
         }
 
-        public virtual async Task<IEnumerable<T>> GetAllAsync(QueryParams query)
+        public virtual async Task<IEnumerable<TType>> GetAllAsync()
         {
-            var pageCount = query.PageCount != 0 ? query.PageCount : 1;
-            var pageSize = query.PageSize != 0 ? query.PageSize : 10;
-            return await _context.Set<T>()
+            return await _context.Set<TType>()
                 .AsNoTracking()
               .OrderByDescending(x => x.Id)
-              .Skip((pageCount - 1) * query.PageSize)
-              .Take(pageSize)
               .ToListAsync().ConfigureAwait(false);
         }
 
-        public virtual async Task<T> GetAsync(int id)
+        public virtual async Task<TType> GetAsync(int id)
         {
-            return await _context.Set<T>().FindAsync(id).ConfigureAwait(false);
+            return await _context.Set<TType>().FindAsync(id).ConfigureAwait(false);
         }
 
-        public virtual async Task<IEnumerable<T>> GetByIds(IEnumerable<int> ids)
+        public virtual async Task<QueryResult<TType>> GetByFilter(QueryParams<TFilterType> queryParams)
         {
-            return await _context.Set<T>()
+            var filterd = Filter(Query.AsNoTracking(), queryParams.EntityFilters);
+            filterd = queryParams.SortOrder == "asc" ? filterd.OrderBy(x => x.Id) : filterd.OrderByDescending(x => x.Id);
+            filterd = filterd
+                .Skip((queryParams.PageNumber - 1) * queryParams.PageSize)
+                .Take(queryParams.PageSize);
+            var list = await filterd.ToListAsync();
+            return new QueryResult<TType>
+            {
+                Items = list,
+                TotalCount = await filterd.CountAsync()
+            };
+
+        }
+
+        public virtual async Task<IEnumerable<TType>> GetByIds(IEnumerable<int> ids)
+        {
+            return await _context.Set<TType>()
                 .Where(x => ids.Contains(x.Id))
                 .ToListAsync()
                 .ConfigureAwait(false);
         }
 
-        public virtual async Task<T> GetNoTracking(int id)
+        public virtual async Task<TType> GetNoTracking(int id)
         {
-            return await _context.Set<T>()
+            return await _context.Set<TType>()
                 .AsNoTracking().FirstOrDefaultAsync(x => x.Id == id).ConfigureAwait(false);
         }
 
-        public virtual async Task Remove(T entity)
+        public virtual async Task Remove(TType entity)
         {
             entity.DeletedOn = DateTime.Now;
             await UpdateAsync(entity);
         }
 
-        public virtual async Task RemoveRange(IEnumerable<T> entities)
+        public virtual async Task RemoveRange(IEnumerable<TType> entities)
         {
             foreach (var entity in entities)
             {
@@ -86,14 +101,14 @@ namespace BManager.Utils
         }
 
 
-        public virtual async Task UpdateAsync(T entity)
+        public virtual async Task UpdateAsync(TType entity)
         {
             entity.UpdatedOn = DateTime.Now;
             _context.Update(entity);
             await Task.CompletedTask;
         }
 
-        public virtual async Task UpdateRange(IEnumerable<T> entities)
+        public virtual async Task UpdateRange(IEnumerable<TType> entities)
         {
             foreach (var entity in entities)
             {

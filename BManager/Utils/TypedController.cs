@@ -6,24 +6,26 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BManager.Utils
 {
-    public abstract class TypedController<TEntity, TCreateDto, TViewDto, TUpdateDto>
+    public abstract class TypedController<TEntity, TCreateDto, TViewDto, TUpdateDto, TFilter>
         : ControllerBase
         where TEntity: AuditEntity
         where TCreateDto : class
         where TUpdateDto : class
+        where TFilter : class
+        where TViewDto: class
     {
-        protected readonly IRepository<TEntity> _repository;
+        protected readonly IRepository<TEntity, TFilter> _repository;
         protected IMapper _mapper;
 
-        public TypedController(IRepository<TEntity> repository, IMapper mapper)
+        public TypedController(IRepository<TEntity, TFilter> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery]QueryParams? query)
+        public async Task<IActionResult> Get()
         {
-            var entities = await _repository.GetAllAsync(query);
+            var entities = await _repository.GetAllAsync();
             return Ok(_mapper.Map<TViewDto[]>(entities));
         }
 
@@ -35,6 +37,19 @@ namespace BManager.Utils
             return Ok(_mapper.Map<TViewDto>(entity));
         }
 
+        [HttpGet("filter")]
+        public async Task<IActionResult> GetFilter([FromQuery] QueryParams<TFilter> query)
+        {
+            var result = await _repository.GetByFilter(query);
+            var items = _mapper.Map<List<TViewDto>>(result.Items);
+            return Ok(new QueryResult<TViewDto>
+            {
+                Items = items,
+                ErrorMessage = result.ErrorMessage,
+                TotalCount = result.TotalCount,
+            });
+        } 
+        
         // POST api/<ValuesController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] TCreateDto dto)
@@ -67,7 +82,7 @@ namespace BManager.Utils
             var entityInDb = await _repository.GetAsync(id);
             if (entityInDb == null)
                 return NotFound();
-            var entity = _mapper.Map<TEntity>(dto);
+            var entity = _mapper.Map(dto, entityInDb);
             await _repository.UpdateAsync(entity);
             await _repository.SaveAsync();
             return Ok(_mapper.Map<TViewDto>(entity));
