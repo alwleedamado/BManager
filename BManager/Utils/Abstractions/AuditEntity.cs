@@ -18,7 +18,7 @@
         {
             get; set;
         }
-        public DateTimeOffset DeletedOn
+        public DateTimeOffset? DeletedOn
         {
             get; set;
         }
