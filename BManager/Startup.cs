@@ -8,7 +8,7 @@ namespace BManager
 {
     public class Startup
     {
-        public IConfiguration Configuration { get;}
+        public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -16,6 +16,12 @@ namespace BManager
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => options.AddPolicy("FreelancerClient", polocy => polocy
+            .WithOrigins("http://localhost:4200")
+            .SetIsOriginAllowed(host => true)
+            .AllowAnyMethod()
+            .AllowAnyHeader())
+            );
             services.AddAutoMapper(typeof(Startup));
             services
                 .AddDbContext<BManagerDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BManagerDb")));
@@ -31,11 +37,12 @@ namespace BManager
         {
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            if(env.IsDevelopment())
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
             app.UseRouting();
+            app.UseCors("FreelancerClient");
             app.UseEndpoints(routes =>
             routes.MapControllerRoute(
                 "Default",
