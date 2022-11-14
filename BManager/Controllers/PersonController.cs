@@ -3,7 +3,7 @@
 
 namespace BManager.Controllers
 {
-    [Route("api/Persons")]
+    [Route("Persons")]
     [ApiController]
     public class PersonController : TypedController<Person, PersonForCreationDto, PersonGetDto, PersonUpdateDto, PersonFilter>
     {

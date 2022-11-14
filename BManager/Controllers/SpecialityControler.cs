@@ -3,7 +3,7 @@ using BManager.Utils.Abstractions;
 
 namespace BManager.Controllers
 {
-    [Route("api/Specialities")]
+    [Route("Specialities")]
     [ApiController]
     public class SpecialityControler : TypedController<Speciality, SpecialityCreateDto, SpecialityGetDto, SpecialityUpdateDto, SpecialityFilter>
     {

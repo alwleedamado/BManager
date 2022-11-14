@@ -19,7 +19,7 @@ namespace BManager
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(options => options.AddPolicy("FreelancerClient", polocy => polocy
-            .WithOrigins("http://localhost:4200")
+            .WithOrigins("http://localhost:4200","https://bmanager.tk")
             .SetIsOriginAllowed(host => true)
             .AllowAnyMethod()
             .AllowAnyHeader())
