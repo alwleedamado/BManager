@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "VXYH5qsDv5Y67IdqsoqUC7ZyIXKMWb61Qf7meUIx93n5nyJIEcBFcTUA0OAIxB/Lmu24WB0V7+R+ZypY/TZKqA==",
+  "dgSpecHash": "5MmhvF3NrsweyX/wH3vxeJQsLgsH0a5qcMVWtAvlFyuufq9aHCTVHxUZwGyRU4U78jxCCItSAQjwAM12SQL82A==",
   "success": true,
   "projectFilePath": "C:\\playground\\dotnet\\BManager\\BManager\\BManager.csproj",
   "expectedPackageFiles": [
@@ -47,6 +47,7 @@
     "C:\\Users\\PC\\.nuget\\packages\\microsoft.netcore.runtime.coreclr\\1.0.2\\microsoft.netcore.runtime.coreclr.1.0.2.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\microsoft.netcore.windows.apisets\\1.0.1\\microsoft.netcore.windows.apisets.1.0.1.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.0\\microsoft.visualstudio.azure.containers.tools.targets.1.17.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",

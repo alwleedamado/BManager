@@ -4,6 +4,8 @@ using AutoMapper;
 using BManager.Data.IRepositories;
 using BManager.Data.Repositories;
 using Newtonsoft.Json;
+using BManager.Utils.Abstractions;
+
 namespace BManager
 {
     public class Startup
@@ -30,7 +32,10 @@ namespace BManager
                 x.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 x.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             });
+
+            // Repos
             services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<ISpecialityRepository, SpecialityRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

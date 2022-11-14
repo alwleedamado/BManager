@@ -1,4 +1,5 @@
 ﻿using BManager.Dtos.Person;
+using BManager.Dtos.Speciality;
 using BManager.Dtos.Telephone;
 using BManager.Models;
 
@@ -15,6 +16,10 @@ namespace BManager.Mappings
             CreateMap<Telephone, TelephoneGetDto>();
             CreateMap<TelephoneCreateDto, Telephone>();
             CreateMap<TelephoneUpdateDto, Telephone>();
+
+            CreateMap<Speciality, SpecialityGetDto>();
+            CreateMap<SpecialityCreateDto, Speciality>();
+            CreateMap<SpecialityUpdateDto, Speciality>();
         }
     }
 }
