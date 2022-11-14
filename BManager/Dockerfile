@@ -7,8 +7,8 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["BManager.csproj", "BManager/"]
-RUN dotnet restore "BManager.csproj"
+COPY ["BManager/BManager.csproj", "BManager/"]
+RUN dotnet restore "BManager/BManager.csproj"
 COPY . .
 WORKDIR "/src/BManager"
 RUN dotnet build "BManager.csproj" -c Release -o /app/build
