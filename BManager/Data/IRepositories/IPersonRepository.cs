@@ -1,5 +1,5 @@
-﻿using BManager.Dtos.Filters;
-using BManager.Models;
+﻿using BManager.Models;
+using BManager.Queries.Person;
 using BManager.Utils;
 using BManager.Utils.Abstractions;
 

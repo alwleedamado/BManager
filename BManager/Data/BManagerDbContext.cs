@@ -6,7 +6,7 @@ namespace BManager.Data
     public class BManagerDbContext : DbContext
     {
         public DbSet<Person> Persons { get;set; }
-        
+        public DbSet<Speciality> Specialities { get; set; }
         public BManagerDbContext(DbContextOptions options) :base(options) 
         {
         }
@@ -15,7 +15,11 @@ namespace BManager.Data
         {
             modelBuilder.Entity<Telephone>().Property(e => e.PhoneType)
                 .HasConversion<string>();
+
+            
             base.OnModelCreating(modelBuilder);
         }
+
+
     }
 }

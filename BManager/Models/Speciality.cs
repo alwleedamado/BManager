@@ -1,10 +1,13 @@
 ﻿using BManager.Utils.Abstractions;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BManager.Models
 {
     public class Speciality : AuditEntity
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
+        [ForeignKey("SpecialityTypeId")]
+        public SpecialityType SpecialityType { get; set; }
+        public int PersonId { get; set; }
+        public int SpecialityTypeId { get; set; }
     }
 }

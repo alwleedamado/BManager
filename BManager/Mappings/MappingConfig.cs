@@ -1,7 +1,8 @@
-﻿using BManager.Dtos.Person;
-using BManager.Dtos.Speciality;
-using BManager.Dtos.Telephone;
+﻿using BManager.Commands.Person;
+
+using BManager.Dtos.SpecialityType;
 using BManager.Models;
+using BManager.Queries.Person;
 
 namespace BManager.Mappings
 {
@@ -9,17 +10,20 @@ namespace BManager.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<Person, PersonGetDto>();
-            CreateMap<PersonUpdateDto, Person>();
-            CreateMap<PersonForCreationDto, Person>();
+            CreateMap<Person, GetPersonQuery>()
+                .ForMember(dest => dest.Specialities, opt => opt
+                .MapFrom(src => src.Specialities.Select(s => new GetSpecialityQuery { Name = s.SpecialityType.Name })));
+            CreateMap<UpdatePersonCommand, Person>();
+            CreateMap<CreatePersonCommand, Person>();
 
-            CreateMap<Telephone, TelephoneGetDto>();
-            CreateMap<TelephoneCreateDto, Telephone>();
-            CreateMap<TelephoneUpdateDto, Telephone>();
+            CreateMap<Telephone, GetTelephoneQuery>();
+            CreateMap<AddTelephoneCommand, Telephone>();
+            CreateMap<UpdateTelephoneCommand, Telephone>();
 
-            CreateMap<Speciality, SpecialityGetDto>();
-            CreateMap<SpecialityCreateDto, Speciality>();
-            CreateMap<SpecialityUpdateDto, Speciality>();
+            CreateMap<SpecialityTypeCreateDto, SpecialityType>();
+            CreateMap<SpecialityType, SpecialityTypeGetDto>();
+            CreateMap<SpecialityTypeUpdateDto, SpecialityType>();
+            CreateMap<SpecialityType, SpecialityTypeGetDto>();
         }
     }
 }

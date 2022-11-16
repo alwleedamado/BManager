@@ -1,11 +1,10 @@
-﻿using BManager.Dtos.Speciality;
-using BManager.Dtos.Telephone;
+﻿
 using BManager.Utils.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace BManager.Dtos.Person
+namespace BManager.Commands.Person
 {
-    public class PersonForCreationDto
+    public class CreatePersonCommand
     {
         [Required]
         public string Name { get; set; }
@@ -13,7 +12,7 @@ namespace BManager.Dtos.Person
         public string Email { get; set; }
         [Required]
         public Gender Gender { get; set; }
-        public List<TelephoneCreateDto> Telephones { get; set; }
-        public List<SpecialityCreateDto> Specialities{ get; set; }
+        public List<AddTelephoneCommand> Telephones { get; set; }
+        public List<AddSpecialityCommand> Specialities { get; set; }
     }
 }

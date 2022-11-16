@@ -1,4 +1,4 @@
-﻿namespace BManager.Dtos.Filters
+﻿namespace BManager.Queries.Person
 {
     public class PersonFilter
     {

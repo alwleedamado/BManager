@@ -1,8 +1,4 @@
-﻿using AutoMapper;
-using BManager.Dtos.Person;
-using BManager.Utils.Abstractions;
-using Devart.Common;
-using Microsoft.AspNetCore.Mvc;
+﻿using BManager.Utils.Abstractions;
 
 namespace BManager.Utils
 {
@@ -33,7 +29,7 @@ namespace BManager.Utils
         [HttpGet("{id}")]
         public async Task<ActionResult> Get(int id)
         {
-            var entity = await _repository.GetAsync(id);
+            var entity = await _repository.GetNoTracking(id);
             return Ok(_mapper.Map<TViewDto>(entity));
         }
 

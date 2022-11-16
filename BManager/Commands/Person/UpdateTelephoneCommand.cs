@@ -1,9 +1,9 @@
 ﻿using BManager.Utils.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace BManager.Dtos.Telephone
+namespace BManager.Commands.Person
 {
-    public class TelephoneUpdateDto
+    public class UpdateTelephoneCommand
     {
         [Required]
         public int Id { get; set; }
