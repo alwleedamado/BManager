@@ -30,7 +30,7 @@ namespace BManager.Utils
 
         public virtual async Task<int> CountAsync()
         {
-            return await _context.Set<TType>().CountAsync().ConfigureAwait(false);
+            return await Query.CountAsync().ConfigureAwait(false);
         }
         public virtual async Task Delete(TType entity)
         {
@@ -40,7 +40,7 @@ namespace BManager.Utils
 
         public virtual async Task<IEnumerable<TType>> GetAllAsync()
         {
-            return await _context.Set<TType>()
+            return await Query
                 .AsNoTracking()
               .OrderByDescending(x => x.Id)
               .ToListAsync().ConfigureAwait(false);
@@ -69,7 +69,7 @@ namespace BManager.Utils
 
         public virtual async Task<IEnumerable<TType>> GetByIds(IEnumerable<int> ids)
         {
-            return await _context.Set<TType>()
+            return await Query
                 .Where(x => ids.Contains(x.Id))
                 .ToListAsync()
                 .ConfigureAwait(false);
@@ -77,7 +77,7 @@ namespace BManager.Utils
 
         public virtual async Task<TType> GetNoTracking(int id)
         {
-            return await _context.Set<TType>()
+            return await Query
                 .AsNoTracking().FirstOrDefaultAsync(x => x.Id == id).ConfigureAwait(false);
         }
 
