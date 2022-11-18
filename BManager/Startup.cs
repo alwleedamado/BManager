@@ -36,6 +36,7 @@ namespace BManager
             // Repos
             services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped<ISpecialityTypeRepository, SpecialityTypeRepository>();
+            services.AddScoped<ITeamRepository, TeamReapository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

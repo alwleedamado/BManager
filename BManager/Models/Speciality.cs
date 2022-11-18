@@ -5,7 +5,6 @@ namespace BManager.Models
 {
     public class Speciality : AuditEntity
     {
-        [ForeignKey("SpecialityTypeId")]
         public SpecialityType SpecialityType { get; set; }
         public int PersonId { get; set; }
         public int SpecialityTypeId { get; set; }

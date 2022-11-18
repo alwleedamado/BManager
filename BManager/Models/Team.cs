@@ -1,10 +1,12 @@
-﻿using BManager.Utils.Abstractions;
+﻿using System.ComponentModel.DataAnnotations;
+using BManager.Utils.Abstractions;
 
 namespace BManager.Models
 {
     public class Team : AuditEntity
     {
+        [Required, MaxLength(50)]
         public string Name { get; set; }
-        public List<Person> Members { get; set; } = new List<Person>();
+        public List<TeamMember> Members { get; set; } = new List<TeamMember>();
     }
 }

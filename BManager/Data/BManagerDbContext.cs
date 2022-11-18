@@ -7,6 +7,7 @@ namespace BManager.Data
     {
         public DbSet<Person> Persons { get;set; }
         public DbSet<Speciality> Specialities { get; set; }
+        public DbSet<Team> Teams { get; set; }
         public BManagerDbContext(DbContextOptions options) :base(options) 
         {
         }
