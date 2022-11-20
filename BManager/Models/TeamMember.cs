@@ -8,5 +8,6 @@ namespace BManager.Models
         public Team Team { get; set; }
         public int PersonId { get; set; }
         public Person Person { get; set; }
+        public MemberRole memberRole { get; set; }
     }
 }

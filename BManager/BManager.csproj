@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Commands\Project\" />
     <Folder Include="Dtos\Team" />
     <Folder Include="Migrations\" />
   </ItemGroup>
