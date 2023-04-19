@@ -7,10 +7,10 @@
         Task AddAllAsync(IEnumerable<TType> entities);
         Task<QueryResult<TType>> GetByFilter(QueryParams<TFilterType> queryParams);
         IQueryable<TType> Filter(IQueryable<TType> query, TFilterType filter);
-        Task<TType> GetAsync(int id);
-        Task<TType> GetNoTracking(int id);
+        Task<TType> GetAsync(Guid id);
+        Task<TType> GetNoTracking(Guid id);
         Task<IEnumerable<TType>> GetAllAsync();
-        Task<IEnumerable<TType>> GetByIds(IEnumerable<int> ids);
+        Task<IEnumerable<TType>> GetByIds(IEnumerable<Guid> ids);
         Task UpdateAsync(TType entity);
         Task UpdateRange(IEnumerable<TType> entities);
         Task Delete(TType entity);

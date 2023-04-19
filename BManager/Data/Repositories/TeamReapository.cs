@@ -1,9 +1,10 @@
-﻿using BManager.Utils;
+﻿using BManager.Teams.Commands;
+using BManager.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace BManager.Data.Repositories
 {
-    public class TeamReapository : Repository<Team, TeamFilter>, ITeamRepository
+    public class TeamReapository : Repository<BManager.Models.Team, TeamFilter>, ITeamRepository
     {
         public TeamReapository(BManagerDbContext context) : base(context)
         {

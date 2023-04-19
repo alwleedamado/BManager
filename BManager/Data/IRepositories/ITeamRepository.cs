@@ -1,4 +1,4 @@
-﻿using BManager.Dtos.Team;
+﻿using BManager.Teams.Commands;
 using BManager.Utils.Abstractions;
 
 namespace BManager.Data.IRepositories

@@ -1,9 +1,5 @@
-﻿using BManager.Data.IRepositories;
-using BManager.Models;
-using BManager.Queries.Person;
-using BManager.Utils;
+﻿using BManager.Persons.Queries;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 
 namespace BManager.Data.Repositories
 {
@@ -20,7 +16,7 @@ namespace BManager.Data.Repositories
             return query.OrderByDescending(x => x.Id).Include(p => p.Telephones)
                 .Include(p => p.Specialities).ThenInclude(sp => sp.SpecialityType);
         }
-        public override async Task<Person> GetAsync(int id)
+        public override async Task<Person> GetAsync(Guid id)
         {
             var entity = await _context.Persons.Include(p => p.Telephones)
                 .Include(p => p.Specialities)
@@ -28,7 +24,7 @@ namespace BManager.Data.Repositories
                 .FirstOrDefaultAsync(x => x.Id == id && x.DeletedOn == null);
             return entity;
         }
-        public override async Task<Person> GetNoTracking(int id)
+        public override async Task<Person> GetNoTracking(Guid id)
         {
             var entity = await _context.Persons.Include(p => p.Telephones)
                             .Include(p => p.Specialities)

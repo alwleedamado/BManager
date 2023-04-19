@@ -27,7 +27,7 @@ namespace BManager.Utils
 
         // GET api/<ValuesController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult> Get(int id)
+        public async Task<ActionResult> Get(Guid id)
         {
             var entity = await _repository.GetNoTracking(id);
             return Ok(_mapper.Map<TViewDto>(entity));
@@ -71,7 +71,7 @@ namespace BManager.Utils
 
         // PUT api/<ValuesController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] TUpdateDto dto)
+        public async Task<IActionResult> Put(Guid id, [FromBody] TUpdateDto dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -86,7 +86,7 @@ namespace BManager.Utils
 
         // DELETE api/<ValuesController>/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             try
             {

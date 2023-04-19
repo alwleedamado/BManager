@@ -46,7 +46,7 @@ namespace BManager.Utils
               .ToListAsync().ConfigureAwait(false);
         }
 
-        public virtual async Task<TType> GetAsync(int id)
+        public virtual async Task<TType> GetAsync(Guid id)
         {
             return await _context.Set<TType>().FindAsync(id).ConfigureAwait(false);
         }
@@ -67,7 +67,7 @@ namespace BManager.Utils
 
         }
 
-        public virtual async Task<IEnumerable<TType>> GetByIds(IEnumerable<int> ids)
+        public virtual async Task<IEnumerable<TType>> GetByIds(IEnumerable<Guid> ids)
         {
             return await Query
                 .Where(x => ids.Contains(x.Id))
@@ -75,7 +75,7 @@ namespace BManager.Utils
                 .ConfigureAwait(false);
         }
 
-        public virtual async Task<TType> GetNoTracking(int id)
+        public virtual async Task<TType> GetNoTracking(Guid id)
         {
             return await Query
                 .AsNoTracking().FirstOrDefaultAsync(x => x.Id == id).ConfigureAwait(false);

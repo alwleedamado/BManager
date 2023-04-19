@@ -1,5 +1,5 @@
 ﻿using BManager.Models;
-using BManager.Queries.Person;
+using BManager.Persons.Queries;
 using BManager.Utils;
 using BManager.Utils.Abstractions;
 

@@ -1,9 +1,8 @@
-﻿using BManager.Commands.Person;
-using BManager.Commands.Team;
-using BManager.Dtos.SpecialityType;
-using BManager.Models;
-using BManager.Queries.Person;
-using BManager.Queries.Team;
+﻿using BManager.Dtos.SpecialityType;
+using BManager.Persons.Commands;
+using BManager.Persons.Queries;
+using BManager.Teams.Commands;
+using BManager.Teams.Queries;
 
 namespace BManager.Mappings
 {
@@ -17,6 +16,8 @@ namespace BManager.Mappings
             CreateMap<UpdatePersonCommand, Person>();
             CreateMap<CreatePersonCommand, Person>();
 
+            CreateMap<Speciality, GetSpecialityQuery>();
+            
             CreateMap<Telephone, GetTelephoneQuery>();
             CreateMap<AddTelephoneCommand, Telephone>();
             CreateMap<UpdateTelephoneCommand, Telephone>();
