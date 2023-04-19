@@ -5,7 +5,7 @@ namespace BManager.Dtos.SpecialityType
     public class SpecialityTypeUpdateDto
     {
         [Required]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [Required, MaxLength(50)]
         public int Name { get; set; }
         [Required, MinLength(255)]

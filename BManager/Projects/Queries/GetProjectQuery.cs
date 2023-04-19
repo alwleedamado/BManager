@@ -4,7 +4,7 @@ namespace BManager.Projects.Queries
 {
     public class GetProjectQuery
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string ProjectName { get; set; }
         public string Description { get; set; }
         public List<GetTeamQuery> Teams { get; set; } = new List<GetTeamQuery>();

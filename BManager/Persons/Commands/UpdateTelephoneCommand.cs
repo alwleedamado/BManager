@@ -6,7 +6,7 @@ namespace BManager.Persons.Commands
     public class UpdateTelephoneCommand
     {
         [Required]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [Required]
         public string TelephoneNumber { get; set; }
         [Required]

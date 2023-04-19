@@ -2,6 +2,6 @@
 {
     public class AddSpecialityCommand
     {
-        public int SpecialityTypeId { get; set; }
+        public Guid SpecialityTypeId { get; set; }
     }
 }
