@@ -1,42 +1,43 @@
 ﻿
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
+using BManager.Infrastructure.Data.IRepositories;
 using BManager.Persons.Commands;
 using BManager.Persons.Queries;
 
 namespace BManager.Persons
 {
-    [Route("Persons")]
+    [Route("Freelancers")]
     [ApiController]
-    public class PersonController : TypedController<Person, CreatePersonCommand, GetPersonQuery, UpdatePersonCommand, PersonFilter>
+    public class FreelancerController : TypedController<Freelancer, CreateFreelancerCommand, GetFreelancerQuery, UpdateFreelancerCommand, FreelancerFilter>
     {
-        public PersonController(IPersonRepository personRepository, IMapper mapper) : base(personRepository, mapper)
+        public FreelancerController(IFreelancerRepository FreelancerRepository, IMapper mapper) : base(FreelancerRepository, mapper)
         {
         }
 
-        [HttpPost("{personId}/specialities")]
-        public async Task<ActionResult> AddSpeciality(Guid personId, [FromBody] AddSpecialityCommand speciality)
+        [HttpPost("{FreelancerId}/specialities")]
+        public async Task<ActionResult> AddSpeciality(Guid FreelancerId, [FromBody] AddSpecialityCommand speciality)
         {
-            var person = await _repository.GetAsync(personId);
-            if (person == null)
+            var Freelancer = await _repository.GetAsync(FreelancerId);
+            if (Freelancer == null)
                 return NotFound();
-            person.Specialities.Add(new Speciality
+            Freelancer.Specialities.Add(new Speciality
             {
                 SpecialityTypeId = speciality.SpecialityTypeId,
             });
-            await _repository.UpdateAsync(person);
+            await _repository.UpdateAsync(Freelancer);
             await _repository.SaveAsync();
-            return Ok(person);
+            return Ok(Freelancer);
         }
 
-        [HttpDelete("{personId}/specialities/{specialityId}")]
-        public async Task<ActionResult> RemoveSpeciality(Guid personId, Guid specialityId)
+        [HttpDelete("{FreelancerId}/specialities/{specialityId}")]
+        public async Task<ActionResult> RemoveSpeciality(Guid FreelancerId, Guid specialityId)
         {
-            var person = await _repository.GetAsync(personId);
-            if (person == null) return NotFound();
-            var spIndex = person.Specialities.FindIndex(x => x.Id.Equals(specialityId));
-            person.Specialities.RemoveAt(spIndex);
-            await _repository.UpdateAsync(person);
+            var Freelancer = await _repository.GetAsync(FreelancerId);
+            if (Freelancer == null) return NotFound();
+            var spIndex = Freelancer.Specialities.FindIndex(x => x.Id.Equals(specialityId));
+            Freelancer.Specialities.RemoveAt(spIndex);
+            await _repository.UpdateAsync(Freelancer);
             await _repository.SaveAsync();
             return NoContent();
         }

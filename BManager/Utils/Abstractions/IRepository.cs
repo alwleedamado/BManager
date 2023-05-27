@@ -1,4 +1,6 @@
-﻿namespace BManager.Utils.Abstractions
+﻿using BManager.PublicApi.Dtos;
+
+namespace BManager.Utils.Abstractions
 {
     public interface IRepository<TType, TFilterType> where TType : Entity
         where TFilterType : class
@@ -18,5 +20,7 @@
         Task RemoveRange(IEnumerable<TType> entities);
         Task<int> CountAsync();
         Task SaveAsync();
+        Task<IList<LookUpEntity>> GetDDl();
+        Task<IList<LookUpEntity>> typeahead(string query);
     }
 }

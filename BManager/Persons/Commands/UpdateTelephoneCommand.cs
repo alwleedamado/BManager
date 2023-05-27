@@ -10,7 +10,7 @@ namespace BManager.Persons.Commands
         [Required]
         public string TelephoneNumber { get; set; }
         [Required]
-        public int PersonId { get; set; }
+        public int FreelancerId { get; set; }
         [Required]
         public PhoneType PhoneType { get; set; }
     }

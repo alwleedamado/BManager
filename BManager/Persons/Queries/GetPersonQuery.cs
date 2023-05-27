@@ -1,12 +1,10 @@
-﻿using BManager.Dtos.SpecialityType;
-using BManager.Models;
-using BManager.Utils.Enums;
+﻿using BManager.Utils.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace BManager.Persons.Queries
 {
-    public class GetPersonQuery
+    public class GetFreelancerQuery
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

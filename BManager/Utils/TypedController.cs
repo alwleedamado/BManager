@@ -1,4 +1,5 @@
-﻿using BManager.Utils.Abstractions;
+﻿using BManager.PublicApi.Dtos;
+using BManager.Utils.Abstractions;
 
 namespace BManager.Utils
 {
@@ -101,5 +102,17 @@ namespace BManager.Utils
             }
         }
 
+        [HttpGet("ddl")]
+        public async Task<IActionResult> GetDDl()
+        {
+            var entities = await _repository.GetDDl();
+            return Ok(_mapper.Map<IList<LookUpEntity>>(entities));
+        }
+        [HttpGet("typeahead/{query}")]
+        public async Task<IActionResult> typeahead(string query)
+        {
+            var entites = await _repository.typeahead(query);
+            return Ok(entites);
+        }
     }
 }

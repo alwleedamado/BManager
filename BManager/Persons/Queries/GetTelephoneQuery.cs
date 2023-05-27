@@ -8,7 +8,7 @@ namespace BManager.Persons.Queries
     {
         public Guid Id { get; set; }
         public string TelephoneNumber { get; set; }
-        public int PersonId { get; set; }
+        public int FreelancerId { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public PhoneType PhoneType { get; set; }
     }

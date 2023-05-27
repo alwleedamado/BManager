@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BManager.Persons.Commands
 {
-    public class UpdatePersonCommand
+    public class UpdateFreelancerCommand
     {
         [Required]
         public Guid Id { get; set; }

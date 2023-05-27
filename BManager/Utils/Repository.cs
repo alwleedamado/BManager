@@ -1,4 +1,5 @@
-﻿using BManager.Data;
+﻿using BManager.Infrastructure.Data;
+using BManager.PublicApi.Dtos;
 using BManager.Utils.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
@@ -116,6 +117,28 @@ namespace BManager.Utils
                 _context.Update(entity);
             }
             await Task.CompletedTask;
+        }
+
+        public async Task<IList<LookUpEntity>> GetDDl()
+        {
+            return await _context.Set<TType>().AsNoTracking()
+                .Select(x => new LookUpEntity
+                {
+                    Id = Guid.Parse(x.GetId()),
+                    Name = x.GetName()
+                }).ToListAsync();
+        }
+        public virtual async Task<IList<LookUpEntity>> typeahead(string query)
+        {
+            var entites = await _context.Set<TType>()
+                .AsNoTracking()
+                .Where(x => x.GetName().IndexOf(query) > -1)
+                .Select(x => new LookUpEntity
+                {
+                    Id = Guid.Parse(x.GetId()),
+                    Name = x.GetName()
+                }).ToListAsync();
+            return entites;
         }
     }
 }

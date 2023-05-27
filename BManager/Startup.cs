@@ -1,10 +1,8 @@
-﻿using BManager.Data;
-using Microsoft.EntityFrameworkCore;
-using AutoMapper;
-using BManager.Data.IRepositories;
-using BManager.Data.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using BManager.Utils.Abstractions;
+using BManager.Infrastructure.Data.IRepositories;
+using BManager.Infrastructure.Data;
+using BManager.Infrastructure.Data.Repositories;
 
 namespace BManager
 {
@@ -34,9 +32,9 @@ namespace BManager
             });
 
             // Repos
-            services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<IFreelancerRepository, FreelancerRepository>();
             services.AddScoped<ISpecialityTypeRepository, SpecialityTypeRepository>();
-            services.AddScoped<ITeamRepository, TeamReapository>();
+            services.AddScoped<ITeamRepository, TeamRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

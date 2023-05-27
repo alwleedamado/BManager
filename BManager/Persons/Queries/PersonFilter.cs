@@ -1,6 +1,6 @@
 ﻿namespace BManager.Persons.Queries
 {
-    public class PersonFilter
+    public class FreelancerFilter
     {
     }
 }

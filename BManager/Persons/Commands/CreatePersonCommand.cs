@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BManager.Persons.Commands
 {
-    public class CreatePersonCommand
+    public class CreateFreelancerCommand
     {
         [Required]
         public string Name { get; set; }
