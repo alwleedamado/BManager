@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BManager.Application.Entites.FreelancerAggregate;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BManager.Infrastructure.Data.Config
@@ -9,7 +10,10 @@ namespace BManager.Infrastructure.Data.Config
         {
             builder.Property(f => f.Name).IsRequired().HasMaxLength(50);
             builder.Property(p => p.Email).IsRequired().HasMaxLength(50);
-            builder.HasMany(p => p.Specialities);
+            var specialities = builder.Metadata.FindNavigation(nameof(Freelancer.Specialities));
+            specialities.SetPropertyAccessMode(PropertyAccessMode.Field);
+            var telephones = builder.Metadata.FindNavigation(nameof(Freelancer.Telephones));
+            telephones.SetPropertyAccessMode(PropertyAccessMode.Field);
         }
     }
 }

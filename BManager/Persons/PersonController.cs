@@ -1,6 +1,7 @@
 ﻿
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
+using BManager.Application.Entites.FreelancerAggregate;
 using BManager.Infrastructure.Data.IRepositories;
 using BManager.Persons.Commands;
 using BManager.Persons.Queries;
@@ -21,10 +22,7 @@ namespace BManager.Persons
             var Freelancer = await _repository.GetAsync(FreelancerId);
             if (Freelancer == null)
                 return NotFound();
-            Freelancer.Specialities.Add(new Speciality
-            {
-                SpecialityTypeId = speciality.SpecialityTypeId,
-            });
+            Freelancer.AddSpeciality(speciality.SpecialityTypeId);
             await _repository.UpdateAsync(Freelancer);
             await _repository.SaveAsync();
             return Ok(Freelancer);
@@ -35,8 +33,7 @@ namespace BManager.Persons
         {
             var Freelancer = await _repository.GetAsync(FreelancerId);
             if (Freelancer == null) return NotFound();
-            var spIndex = Freelancer.Specialities.FindIndex(x => x.Id.Equals(specialityId));
-            Freelancer.Specialities.RemoveAt(spIndex);
+            Freelancer.RemoveSpeciality(specialityId);
             await _repository.UpdateAsync(Freelancer);
             await _repository.SaveAsync();
             return NoContent();

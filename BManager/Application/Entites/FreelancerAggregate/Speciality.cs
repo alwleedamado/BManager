@@ -1,6 +1,6 @@
 ﻿using BManager.Utils.Abstractions;
 
-namespace BManager.Application.Entites
+namespace BManager.Application.Entites.FreelancerAggregate
 {
     public class Speciality : AuditEntity
     {

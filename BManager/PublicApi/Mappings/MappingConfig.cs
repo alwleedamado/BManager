@@ -1,4 +1,5 @@
-﻿using BManager.Application.Entites.TeamAggregate;
+﻿using BManager.Application.Entites.FreelancerAggregate;
+using BManager.Application.Entites.TeamAggregate;
 using BManager.Persons.Commands;
 using BManager.Persons.Queries;
 using BManager.PublicApi.Dtos.SpecialityType;

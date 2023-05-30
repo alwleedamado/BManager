@@ -1,4 +1,5 @@
-﻿using BManager.Utils.Abstractions;
+﻿using BManager.Application.Entites.FreelancerAggregate;
+using BManager.Utils.Abstractions;
 
 namespace BManager.Application.Entites.TeamAggregate
 {

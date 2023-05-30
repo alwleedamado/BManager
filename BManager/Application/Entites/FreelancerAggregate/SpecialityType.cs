@@ -1,7 +1,7 @@
 ﻿using BManager.Utils.Abstractions;
 using System.ComponentModel.DataAnnotations;
 
-namespace BManager.Application.Entites
+namespace BManager.Application.Entites.FreelancerAggregate
 {
     public class SpecialityType : AuditEntity
     {

@@ -8,6 +8,6 @@ namespace BManager.Application.Entites
         public string TelephoneNumber { get; set; }
         public Guid FreelancerId { get; set; }
         public PhoneType PhoneType { get; set; }
-        public Guid TelephoneTypeId { get; set; }
+
     }
 }

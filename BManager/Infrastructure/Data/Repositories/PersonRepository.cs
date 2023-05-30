@@ -1,4 +1,5 @@
-﻿using BManager.Infrastructure.Data.IRepositories;
+﻿using BManager.Application.Entites.FreelancerAggregate;
+using BManager.Infrastructure.Data.IRepositories;
 using BManager.Persons.Queries;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +16,8 @@ namespace BManager.Infrastructure.Data.Repositories
         public override IQueryable<Freelancer> Filter(IQueryable<Freelancer> query, FreelancerFilter filter)
         {
             return query.OrderByDescending(x => x.Id).Include(p => p.Telephones)
-                .Include(p => p.Specialities).ThenInclude(sp => sp.SpecialityType);
+                .Include(x => x.Specialities)
+                .ThenInclude(sp => sp.SpecialityType);
         }
         public override async Task<Freelancer> GetAsync(Guid id)
         {

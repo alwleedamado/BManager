@@ -1,4 +1,5 @@
-﻿using BManager.Application.Entites.TeamAggregate;
+﻿using BManager.Application.Entites.FreelancerAggregate;
+using BManager.Application.Entites.TeamAggregate;
 using Microsoft.EntityFrameworkCore;
 
 namespace BManager.Infrastructure.Data

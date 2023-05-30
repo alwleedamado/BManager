@@ -1,4 +1,5 @@
-﻿using BManager.Infrastructure.Data.IRepositories;
+﻿using BManager.Application.Entites.FreelancerAggregate;
+using BManager.Infrastructure.Data.IRepositories;
 using BManager.PublicApi.Dtos.Filters;
 
 namespace BManager.Infrastructure.Data.Repositories

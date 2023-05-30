@@ -1,4 +1,5 @@
-﻿using BManager.Persons.Queries;
+﻿using BManager.Application.Entites.FreelancerAggregate;
+using BManager.Persons.Queries;
 using BManager.Utils.Abstractions;
 
 namespace BManager.Infrastructure.Data.IRepositories
