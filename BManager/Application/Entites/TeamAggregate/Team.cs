@@ -16,10 +16,11 @@ namespace BManager.Application.Entites.TeamAggregate
 
         public void Addmember(TeamMember member)
         {
-            if (Members.Any(m => m.Id == member.Id))
+            if (Members.Any(m => m.FreelancerId == member.FreelancerId))
             {
-                throw new MemberAccessException();
+                throw new DuplicateException($"This team already has this member");
             }
+
             Members.Add(member);
         }
 

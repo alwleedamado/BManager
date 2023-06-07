@@ -8,15 +8,24 @@ namespace BManager.Teams;
 [Route("teams")]
 public class TeamController : TypedController<Team, CreateTeamCommand, GetTeamQuery, UpdateTeamCommand, TeamFilter>
 {
+    private readonly ITeamRepository _teamRepository;
     public TeamController(ITeamRepository repository, IMapper mapper) : base(repository, mapper)
     {
+        _teamRepository = repository;
     }
 
-    [HttpPost("{teamId:guid}")]
+    [HttpPost("{teamId:guid}/AddMember")]
     public async Task<IActionResult> AddMember(Guid teamId, [FromBody] AddMemberToTeamCommand member)
     {
-        /*        var result = await _repository.AddMemberAsync(teamId, member);
-        */
-        return null;
+        await _teamRepository.AddMember(teamId, _mapper.Map<TeamMember>(member));
+        await _teamRepository.SaveAsync();
+        return NoContent();
+    }
+
+    [HttpGet("{teamid:guid}/GetMembers")]
+    public async Task<IActionResult> GetTeammembers(Guid teamId)
+    {
+        var entities = await _teamRepository.GetMembers(teamId);
+        return Ok(entities);
     }
 }

@@ -12,8 +12,10 @@ namespace BManager.Persons
     [ApiController]
     public class FreelancerController : TypedController<Freelancer, CreateFreelancerCommand, GetFreelancerQuery, UpdateFreelancerCommand, FreelancerFilter>
     {
-        public FreelancerController(IFreelancerRepository FreelancerRepository, IMapper mapper) : base(FreelancerRepository, mapper)
+        private readonly IFreelancerRepository _freelancerRepository;
+        public FreelancerController(IFreelancerRepository freelancerRepository, IMapper mapper) : base(freelancerRepository, mapper)
         {
+            _freelancerRepository = freelancerRepository;
         }
 
         [HttpPost("{FreelancerId}/specialities")]
@@ -39,5 +41,10 @@ namespace BManager.Persons
             return NoContent();
         }
 
+        [HttpGet("typeaheadBySpecialityType/{specialityTypeId:guid}/{query}")]
+        public async Task<IActionResult> TypeaheadBySpecialityType(Guid specialityTypeId, string query) { 
+            var entites = await _freelancerRepository.TypeaheadBySpecialityType(specialityTypeId, query);
+            return Ok(entites);
+        }
     }
 }

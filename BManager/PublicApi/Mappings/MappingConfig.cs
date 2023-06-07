@@ -31,6 +31,8 @@ namespace BManager.PublicApi.Mappings
             CreateMap<Team, GetTeamQuery>();
             CreateMap<CreateTeamCommand, Team>();
             CreateMap<UpdateTelephoneCommand, Team>();
-        }
+            CreateMap<AddMemberToTeamCommand, TeamMember>();
+
+                 }
     }
 }

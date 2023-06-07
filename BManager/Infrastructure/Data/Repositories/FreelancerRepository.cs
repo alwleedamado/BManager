@@ -1,6 +1,7 @@
 ﻿using BManager.Application.Entites.FreelancerAggregate;
 using BManager.Infrastructure.Data.IRepositories;
 using BManager.Persons.Queries;
+using BManager.PublicApi.Dtos;
 using Microsoft.EntityFrameworkCore;
 
 namespace BManager.Infrastructure.Data.Repositories
@@ -44,6 +45,17 @@ namespace BManager.Infrastructure.Data.Repositories
                 .ThenInclude(sp => sp.SpecialityType)
                 .ToListAsync()
                 .ConfigureAwait(false);
+        }
+
+        public  async Task<List<LookUpEntity>> TypeaheadBySpecialityType(Guid specialityTypeId, string query)
+        {
+            return await _context.Freelancers.AsNoTracking()
+                .Include(p => p.Specialities)
+                .Where(x => x.Specialities.Any(sp => sp.SpecialityTypeId == specialityTypeId))
+                .Where(p => p.Name.Contains(query))
+                .OrderBy(p => p.Name)
+                .Select(x => new LookUpEntity { Id = x.Id, Name = x.Name})
+                .ToListAsync();
         }
     }
 }
