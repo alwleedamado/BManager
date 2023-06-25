@@ -342,3 +342,4 @@ healthchecksdb
 # vscode realated files
 .vscode/*
 appsettings.Development.json*
+/.vs/*
