@@ -1,13 +1,12 @@
-﻿using BManager.Utils.Abstractions;
+﻿using BManaber.Application.Entites;
+using BManager.Utils.Abstractions;
 using System.ComponentModel.DataAnnotations;
 
 namespace BManager.Application.Entites.FreelancerAggregate
 {
-    public class SpecialityType : AuditEntity
+    public class SpecialityType : EntityBase<int>
     {
-        [Required, MaxLength(50)]
         public string Name { get; set; }
-        [Required, MaxLength(255)]
         public string Description { get; set; }
     }
 }

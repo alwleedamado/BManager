@@ -1,20 +1,27 @@
-﻿using BManager.Application.Exceptions;
+﻿using BManaber.Application.Entites;
+using BManager.Application.Enums;
+using BManager.Application.Exceptions;
 using BManager.Utils.Abstractions;
 using BManager.Utils.Enums;
 
 namespace BManager.Application.Entites.FreelancerAggregate
 {
-    public class Freelancer : AuditEntity
+    public class Freelancer : AuditEntity<Guid>
     {
-        public static new string NameProperty = "Email";
         public string Name { get; set; }
         public string Email { get; set; }
         public Gender Gender { get; set; }
         private readonly List<Telephone> _telephones = new List<Telephone>();
-        public IReadOnlyCollection<Telephone> Telephones => _telephones;
+        public IReadOnlyCollection<Telephone> Telephones => _telephones.AsReadOnly();
         private readonly List<Speciality> _specialities = new List<Speciality>();
-        public IReadOnlyCollection<Speciality> Specialities => _specialities;
+        public IReadOnlyCollection<Speciality> Specialities => _specialities.AsReadOnly();
 
+        public Freelancer(string name, string email, Gender gender)
+        {
+            Name = name;
+            Email = email;
+            Gender = gender;
+        }
         public void AddSpeciality(Guid specialityTypeId)
         {
             if (_specialities.Any(x => x.SpecialityTypeId == specialityTypeId))

@@ -1,8 +1,9 @@
-﻿using BManager.Utils.Abstractions;
+﻿using BManaber.Application.Entites;
+using BManager.Utils.Abstractions;
 
 namespace BManager.Application.Entites.FreelancerAggregate
 {
-    public class Speciality : AuditEntity
+    public class Speciality : EntityBase<int>
     {
         public SpecialityType SpecialityType { get; set; }
         public Guid SpecialityTypeId { get; set; }
