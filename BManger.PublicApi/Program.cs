@@ -1,3 +1,4 @@
+using BManager.Infrastructure;
 namespace BManger.PublicApi
 {
     public class Program
@@ -5,6 +6,8 @@ namespace BManger.PublicApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddInfrastructure(builder.Configuration.GetConnectionString("BManagerDb"));
 
             // Add services to the container.
 
